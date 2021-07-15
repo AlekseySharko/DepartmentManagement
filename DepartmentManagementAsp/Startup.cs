@@ -1,8 +1,9 @@
+using DepartmentManagementEfCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using DepartmentsAndEmployeesEfCore;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -19,7 +20,7 @@ namespace DepartmentManagementAsp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DepartmentsAndEmployeesContext>(opts =>
+            services.AddDbContext<DepartmentManagementContext>(opts =>
             {
                 opts.UseSqlServer(Configuration["ConnectionStrings:DepartmentsAndEmployeesConnection"]);
             });
@@ -32,14 +33,13 @@ namespace DepartmentManagementAsp
             {
                 app.UseDeveloperExceptionPage();
                 DepartmentsAndEmployeesDataSeeder.Seed(app.ApplicationServices
-                    .CreateScope().ServiceProvider.GetRequiredService<DepartmentsAndEmployeesContext>());
+                    .CreateScope().ServiceProvider.GetRequiredService<DepartmentManagementContext>());
             }
             else
             {
                 app.UseExceptionHandler("/Error");
             }
-
-            //app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();

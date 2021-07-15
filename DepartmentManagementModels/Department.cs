@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DepartmentsAndEmployeesModels
+namespace DepartmentManagementModels
 {
     public class Department
     {

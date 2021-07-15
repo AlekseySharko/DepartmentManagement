@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DepartmentsAndEmployeesModels;
+using DepartmentManagementModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace DepartmentsAndEmployeesEfCore
+namespace DepartmentManagementEfCore
 {
     public static class DepartmentsAndEmployeesDataSeeder
     {
-        public static void Seed(DepartmentsAndEmployeesContext context)
+        public static void Seed(DepartmentManagementContext context)
         {
             context.Database.Migrate();
 

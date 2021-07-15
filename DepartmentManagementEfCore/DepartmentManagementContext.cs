@@ -1,11 +1,11 @@
-﻿using DepartmentsAndEmployeesModels;
+﻿using DepartmentManagementModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace DepartmentsAndEmployeesEfCore
+namespace DepartmentManagementEfCore
 {
-    public class DepartmentsAndEmployeesContext : DbContext
+    public class DepartmentManagementContext : DbContext
     {
-        public DepartmentsAndEmployeesContext(DbContextOptions<DepartmentsAndEmployeesContext> opts)
+        public DepartmentManagementContext(DbContextOptions<DepartmentManagementContext> opts)
             : base(opts) { }
 
         public DbSet<Department> Departments { get; set; }

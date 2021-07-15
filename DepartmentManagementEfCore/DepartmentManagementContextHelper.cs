@@ -1,8 +1,8 @@
-﻿using DepartmentsAndEmployeesModels;
+﻿using DepartmentManagementModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DepartmentsAndEmployeesEfCore
+namespace DepartmentManagementEfCore
 {
     static class DepartmentsAndEmployeesContextHelper
     {
