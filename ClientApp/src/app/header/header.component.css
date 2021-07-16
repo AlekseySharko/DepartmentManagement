@@ -1,0 +1,101 @@
+.header-container {
+  --burger-color: var(--text-color);
+  --bg-color:  #131313;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  width: 100%;
+  font-weight: 500;
+  font-size: 1.0625rem;
+  padding: 0.625rem 4.5%;
+  height: 4.375rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-text {
+  font-size: 1.45rem;
+  padding-right: 3.5%;
+}
+.link-insides {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.link-insides > span {
+  padding-left: 0.3rem;
+}
+.regular-link {
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+.regular-link:hover{
+  color: #7F7FD5;
+  transition: all 0.3s ease;
+}
+.regular-link:focus {
+  box-shadow: none;
+}
+.header-burger > div{
+  width: 1.5625rem;
+  height: 0.125rem;
+  background-color: var(--burger-color);
+  margin: 0.3125rem 0rem;
+}
+.header-burger:hover {
+  --burger-color: var(--hover-color);
+  cursor: pointer;
+}
+.header-nav-list > a {
+  font-size: 1.25rem;
+}
+.header-nav-list {
+  background-color: var(--bg-color);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: var(--min-page-width);
+  left: 0rem;
+  top: 4.3125rem;
+  --header-nav-list: translateX(-100%);
+  transform: var(--header-nav-list);
+}
+.header-nav-list-toggle {
+  --header-nav-list: translateX(0%);
+  z-index: 999;
+}
+.regular-link {
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media(max-width: 22.875rem) {
+  .header-text {
+    font-size: 1.23rem;
+  }
+}
+@media(min-width: 54.6875rem) {
+  .header-burger {
+    display: none;
+  }
+  .header-nav-list {
+    background-image: initial;
+    position: initial;
+    display: initial;
+    flex-direction: initial;
+    width: initial;
+    min-width: initial;
+    left: initial;
+    top: initial;
+    --header-nav-list: translateX(0%);
+  }
+  .header-nav-list-toggle {
+    --header-nav-list: translateX(0%);
+  }
+  .regular-link {
+    height: 100%;
+    display: inline-block;
+  }
+}
+

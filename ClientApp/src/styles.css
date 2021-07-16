@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  --hover-color: #A0D3F9;
+  --min-page-width: 20rem;
+  --text-color: #EDF0F1;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  min-width: var(--min-page-width);
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
