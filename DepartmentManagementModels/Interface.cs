@@ -1,6 +1,0 @@
-﻿namespace DepartmentManagementModels
-{
-    class Interface
-    {
-    }
-}

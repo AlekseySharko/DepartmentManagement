@@ -1,3 +1,4 @@
+using DepartmentManagementAsp.Configuration;
 using DepartmentManagementEfCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +25,7 @@ namespace DepartmentManagementAsp
             {
                 opts.UseSqlServer(Configuration["ConnectionStrings:DepartmentsAndEmployeesConnection"]);
             });
+            services.AddEfRepositories();
             services.AddControllers();
         }
 
@@ -32,7 +34,7 @@ namespace DepartmentManagementAsp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                DepartmentsAndEmployeesDataSeeder.Seed(app.ApplicationServices
+                DepartmentManagementDataSeeder.Seed(app.ApplicationServices
                     .CreateScope().ServiceProvider.GetRequiredService<DepartmentManagementContext>());
             }
             else

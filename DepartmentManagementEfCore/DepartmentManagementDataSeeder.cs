@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DepartmentManagementEfCore
 {
-    public static class DepartmentsAndEmployeesDataSeeder
+    public static class DepartmentManagementDataSeeder
     {
         public static void Seed(DepartmentManagementContext context)
         {

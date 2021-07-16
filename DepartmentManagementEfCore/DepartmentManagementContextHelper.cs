@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DepartmentManagementEfCore
 {
-    static class DepartmentsAndEmployeesContextHelper
+    static class DepartmentManagementContextHelper
     {
         public static void SetUpDepartments(this ModelBuilder modelBuilder)
         {
