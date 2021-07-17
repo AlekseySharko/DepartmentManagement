@@ -1,5 +1,5 @@
 <mat-form-field appearance="fill" class="department-form-field">
-  <mat-label>Main category</mat-label>
+  <mat-label>Отдел</mat-label>
   <mat-select matNativeControl (selectionChange)="onDepartmentChange()" [(ngModel)]="selectedDepartment">
     <mat-option *ngFor="let department of departments" [value]="department">{{department.name}}</mat-option>
   </mat-select>

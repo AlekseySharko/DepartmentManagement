@@ -26,24 +26,14 @@ namespace DepartmentManagementAsp.Controllers
         public async Task<IActionResult> PostDepartment([FromBody] Department department)
         {
             OperationResult operationResult = await DepartmentRepository.AddDepartmentAsync(department);
-            if (operationResult.Success)
-            {
-                return Ok();
-            }
-
-            return BadRequest(operationResult.Message);
+            return GetResultFromOperationResult(operationResult);
         }
 
         [HttpPut]
         public async Task<IActionResult> PutDepartment([FromBody] Department department)
         {
             OperationResult operationResult = await DepartmentRepository.EditDepartmentAsync(department);
-            if (operationResult.Success)
-            {
-                return Ok();
-            }
-
-            return BadRequest(operationResult.Message);
+            return GetResultFromOperationResult(operationResult);
         }
 
         [HttpDelete("{id}")]
@@ -51,12 +41,7 @@ namespace DepartmentManagementAsp.Controllers
         {
             OperationResult operationResult =
                 await DepartmentRepository.DeleteDepartmentAsync(new Department {DepartmentId = id});
-            if (operationResult.Success)
-            {
-                return Ok();
-            }
-
-            return BadRequest(operationResult.Message);
+            return GetResultFromOperationResult(operationResult);
         }
 
         [HttpGet("positions")]
@@ -65,6 +50,15 @@ namespace DepartmentManagementAsp.Controllers
             return Ok(DepartmentRepository.GetExistingPositions(departmentId));
         }
 
+        private IActionResult GetResultFromOperationResult(OperationResult operationResult)
+        {
+            if (operationResult.Success)
+            {
+                return Ok();
+            }
+
+            return BadRequest(operationResult.Message);
+        }
         private IEnumerable<Department> BreakDepartmentReferenceCycle(IQueryable<Department> departments)
         {
             var listDepartments = departments.ToList();

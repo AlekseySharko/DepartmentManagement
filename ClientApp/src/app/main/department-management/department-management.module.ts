@@ -24,6 +24,8 @@ import { PositionInputComponent } from './employees/form-employee-dialog/positio
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { FormEmployeeDialogComponent } from './employees/form-employee-dialog/form-employee-dialog.component';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import { FormDepartmentDialogComponent } from './departments/form-department-dialog/form-department-dialog.component';
+import { DepEmployeesListComponent } from './departments/form-department-dialog/dep-employees-list/dep-employees-list.component';
 
 
 
@@ -37,7 +39,9 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
     EmployeesControlsComponent,
     DepartmentSelectComponent,
     PositionInputComponent,
-    FormEmployeeDialogComponent
+    FormEmployeeDialogComponent,
+    FormDepartmentDialogComponent,
+    DepEmployeesListComponent
   ],
   imports: [
     CommonModule,

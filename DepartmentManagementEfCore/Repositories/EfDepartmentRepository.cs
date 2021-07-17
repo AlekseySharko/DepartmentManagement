@@ -34,6 +34,7 @@ namespace DepartmentManagementEfCore.Repositories
         {
             return await EfRepoHelper.InvokeManagingExceptions(async () =>
             {
+                department.WasAddedDate = DateTime.Now;
                 DepartmentManagementContext.Departments.Add(department);
                 await DepartmentManagementContext.SaveChangesAsync();
             }, "Ошибка при добавлении отдела");

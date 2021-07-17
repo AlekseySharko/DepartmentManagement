@@ -29,24 +29,14 @@ namespace DepartmentManagementAsp.Controllers
         public async Task<IActionResult> PostEmployee([FromBody] Employee employee)
         {
             OperationResult operationResult = await EmployeeRepository.AddEmployeeAsync(employee);
-            if (operationResult.Success)
-            {
-                return Ok();
-            }
-
-            return BadRequest(operationResult.Message);
+            return GetResultFromOperationResult(operationResult);
         }
 
         [HttpPut]
         public async Task<IActionResult> PutEmployee([FromBody] Employee employee)
         {
             OperationResult operationResult = await EmployeeRepository.EditEmployeeAsync(employee);
-            if (operationResult.Success)
-            {
-                return Ok();
-            }
-
-            return BadRequest(operationResult.Message);
+            return GetResultFromOperationResult(operationResult);
         }
 
         [HttpDelete("{id}")]
@@ -54,6 +44,18 @@ namespace DepartmentManagementAsp.Controllers
         {
             OperationResult operationResult =
                 await EmployeeRepository.DeleteEmployeeAsync(new Employee {EmployeeId = id});
+            return GetResultFromOperationResult(operationResult);
+        }
+
+        [HttpDelete("{employeeId}/from-department")]
+        public async Task<IActionResult> RemoveFromDepartment([FromRoute] long employeeId)
+        {
+            OperationResult operationResult = await EmployeeRepository.RemoveEmployeeFromDepartmentAsync(employeeId);
+            return GetResultFromOperationResult(operationResult);
+        }
+
+        private IActionResult GetResultFromOperationResult(OperationResult operationResult)
+        {
             if (operationResult.Success)
             {
                 return Ok();

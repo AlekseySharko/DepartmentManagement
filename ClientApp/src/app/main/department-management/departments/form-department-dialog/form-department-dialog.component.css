@@ -1,0 +1,50 @@
+.department-form {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.department-button-group {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+mat-form-field, :host::ng-deep .department-form-field, :host::ng-deep .position-form-field {
+  width: 100%;
+  font-size: 1rem;
+}
+.header-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-bottom: 1rem;
+}
+app-dep-employees-list {
+  width: 100%;
+  padding-bottom: 1rem;
+}
+@media(max-width: 30rem) {
+  .department-form {
+    padding: initial;
+  }
+  .mat-dialog-container {
+    padding: 0.5rem;
+  }
+  .department-button-group {
+    width: 100%;
+  }
+  .header-text {
+    font-size: 1.1rem;
+  }
+  .additional-dates {
+    font-size: 0.8rem;
+  }
+  mat-form-field {
+    font-size: 0.95rem;
+  }
+  .btn {
+    font-size: 0.95rem;
+  }
+}

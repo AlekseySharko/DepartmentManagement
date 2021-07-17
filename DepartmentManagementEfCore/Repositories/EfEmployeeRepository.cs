@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -118,7 +117,8 @@ namespace DepartmentManagementEfCore.Repositories
 
         private OperationResult<Employee> GetRequiredEmployee(long employeeId)
         {
-            Employee employee = DepartmentManagementContext.Employees.FirstOrDefault(e => e.EmployeeId == employeeId);
+            Employee employee = DepartmentManagementContext.Employees.Include(e => e.Department)
+                .FirstOrDefault(e => e.EmployeeId == employeeId);
             if (employee is null)
             {
                 return OperationResult<Employee>.Failed("Такого сотрудника не существует");

@@ -17,7 +17,17 @@ export class DepartmentProviderService {
           })
       );
   }
-
+  postDepartment(department: Department) {
+    department.wasAddedDate = new Date();
+    return this.http.post("api/departments", department);
+  }
+  putDepartment(department: Department) {
+    department.wasAddedDate = new Date();
+    return this.http.put("api/departments", department);
+  }
+  deleteDepartment(departmentId: number) {
+    return this.http.delete("api/departments/" + departmentId)
+  }
   getExistingPositions(departmentId: number) {
     return this.http.get<string[]>("api/departments/positions", {
       params: new HttpParams().set("departmentId", departmentId)

@@ -50,6 +50,8 @@
   :host ::ng-deep .mat-column-wasEmployedDate{
     display: none;
   }
+}
+@media(max-width: 30rem) {
   :host ::ng-deep .btn-control-group {
     align-items: center;
     flex-direction: column;

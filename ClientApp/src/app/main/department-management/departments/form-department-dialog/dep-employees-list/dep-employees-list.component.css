@@ -1,0 +1,17 @@
+.div-employees-list {
+  width: 100%;
+}
+.mat-table {
+  width: 100%;
+}
+.mat-cell {
+  font-size: 1.05rem;
+}
+@media(max-width: 30rem) {
+  .mat-cell {
+    font-size: 0.9rem;
+  }
+  .btn-control {
+    font-size: 0.9rem;
+  }
+}

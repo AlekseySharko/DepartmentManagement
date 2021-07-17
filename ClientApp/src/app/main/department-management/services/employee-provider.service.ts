@@ -7,9 +7,11 @@ import {Employee} from "../classes/employee";
 export class EmployeeProviderService {
   constructor(private http: HttpClient) {}
 
-  getEmployees(includeDepartment: boolean = false) {
+  getEmployees(includeDepartment: boolean = false, departmentId = 0) {
     return this.http.get<Employee[]>("api/employees", {
-      params: new HttpParams().set("includeDepartment", includeDepartment)
+      params: new HttpParams()
+        .set("includeDepartment", includeDepartment)
+        .set("departmentId", departmentId)
     }).pipe(
         map(employees => {
           this.transformToDates(employees);
@@ -27,6 +29,9 @@ export class EmployeeProviderService {
   }
   deleteEmployee(employeeId: number) {
     return this.http.delete("api/employees/" + employeeId);
+  }
+  removeFromDepartment(employeeId: number) {
+    return this.http.delete("api/employees/" + employeeId + "/from-department");
   }
   private transformToDates(employees: Employee[]) {
     employees.forEach(employee => {
