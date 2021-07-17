@@ -6,13 +6,13 @@
     <div></div>
   </div>
   <div class="header-nav-list" (click)="toggleDropdown()" [classToggle]="toggleValue" [toggleClass]="'header-nav-list-toggle'">
-      <a class="btn regular-link" routerLink="/catalog">
+      <a class="btn regular-link" routerLink="/management/departments">
         <div class="link-insides">
           <mat-icon>view_list</mat-icon>
           <span>Отделы</span>
         </div>
       </a>
-      <a class="btn regular-link" href="#">
+      <a class="btn regular-link" routerLink="/management/employees">
         <div class="link-insides">
           <mat-icon>manage_accounts</mat-icon>
           <span>Сотрудники</span>

@@ -36,6 +36,7 @@ namespace DepartmentManagementEfCore
                             FullName = "Самсонов Евгений Авксентьевич",
                             Position = "Младший технический специалист",
                             WasAddedDate = DateTime.Now,
+                            WasChangedDate = DateTime.Now,
                             WasEmployedDate = DateTime.Now - TimeSpan.FromDays(2),
                             Department = itDep
                         },
@@ -53,13 +54,14 @@ namespace DepartmentManagementEfCore
                             Position = "Junior developer",
                             WasAddedDate = DateTime.Now,
                             WasEmployedDate = DateTime.Now - TimeSpan.FromDays(4),
-                            Department = itDep
+                            Department = itDep,
                         },
                         new Employee
                         {
                             FullName = "Силин Рубен Васильевич",
                             Position = "Senior developer",
                             WasAddedDate = DateTime.Now,
+                            WasChangedDate = DateTime.Now,
                             WasEmployedDate = DateTime.Now - TimeSpan.FromDays(300),
                             Department = itDep
                         }
@@ -68,7 +70,8 @@ namespace DepartmentManagementEfCore
                 Department accountingDep = new Department
                 {
                     Name = "Бухгалтерия",
-                    WasAddedDate = DateTime.Now
+                    WasAddedDate = DateTime.Now,
+                    WasChangedDate = DateTime.Now,
                 };
 
                 accountingDep.Employees = new List<Employee>
@@ -78,6 +81,7 @@ namespace DepartmentManagementEfCore
                         FullName = "Панова Дарьяна Серапионовна",
                         Position = "Главный бухгалтер",
                         WasAddedDate = DateTime.Now,
+                        WasChangedDate = DateTime.Now,
                         WasEmployedDate = DateTime.Now - TimeSpan.FromDays(55),
                         Department = accountingDep
                     },
@@ -86,6 +90,7 @@ namespace DepartmentManagementEfCore
                         FullName = "Беляева Надежда Якововна",
                         Position = "Бухгалтер",
                         WasAddedDate = DateTime.Now,
+                        WasChangedDate = DateTime.Now,
                         WasEmployedDate = DateTime.Now - TimeSpan.FromDays(1),
                         Department = accountingDep
                     },
@@ -94,6 +99,7 @@ namespace DepartmentManagementEfCore
                         FullName = "Григорьева Ася Валерьяновна",
                         Position = "Бухгалтер",
                         WasAddedDate = DateTime.Now,
+                        WasChangedDate = DateTime.Now,
                         WasEmployedDate = DateTime.Now - TimeSpan.FromDays(5),
                         Department = accountingDep
                     },

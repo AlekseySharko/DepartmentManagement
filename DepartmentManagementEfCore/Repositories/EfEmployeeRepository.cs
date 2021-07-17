@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -32,6 +33,10 @@ namespace DepartmentManagementEfCore.Repositories
         {
             return await EfRepoHelper.InvokeManagingExceptions(async () =>
             {
+                employee.WasAddedDate = DateTime.Now;
+                employee.Department =
+                    DepartmentManagementContext.Departments.FirstOrDefault(d =>
+                        d.DepartmentId == employee.Department.DepartmentId);
                 DepartmentManagementContext.Employees.Add(employee);
                 await DepartmentManagementContext.SaveChangesAsync();
             }, "Ошибка при добавлении сотрудника");
@@ -125,7 +130,7 @@ namespace DepartmentManagementEfCore.Repositories
         private async Task ChangeDepartmentIfNeeded(Employee employeeToEdit, Employee newEmployeeData)
         {
             if (newEmployeeData.Department?.DepartmentId > 0 &&
-                employeeToEdit.Department.DepartmentId != newEmployeeData.Department.DepartmentId)
+                employeeToEdit.Department?.DepartmentId != newEmployeeData.Department?.DepartmentId)
             {
                 await MoveEmployeeToDepartmentAsync(newEmployeeData.Department.DepartmentId, employeeToEdit.EmployeeId);
             }

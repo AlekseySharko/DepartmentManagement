@@ -39,7 +39,7 @@ namespace DepartmentManagementEfCore
                 .SetUpDateType();
             modelBuilder.Entity<Employee>()
                 .Property(e => e.WasEmployedDate)
-                .SetUpDateType();
+                .HasColumnType("DATE");
             modelBuilder.Entity<Employee>()
                 .Property(e => e.Position)
                 .HasColumnType("NVARCHAR(70)")

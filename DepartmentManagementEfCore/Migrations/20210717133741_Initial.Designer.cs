@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DepartmentManagementEfCore.Migrations
 {
     [DbContext(typeof(DepartmentManagementContext))]
-    [Migration("20210715173900_Initial")]
+    [Migration("20210717133741_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,7 +71,7 @@ namespace DepartmentManagementEfCore.Migrations
                         .HasColumnType("DATETIME2(2)");
 
                     b.Property<DateTime?>("WasEmployedDate")
-                        .HasColumnType("DATETIME2(2)");
+                        .HasColumnType("DATE");
 
                     b.HasKey("EmployeeId");
 

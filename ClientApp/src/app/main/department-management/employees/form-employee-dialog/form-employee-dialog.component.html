@@ -1,0 +1,32 @@
+<form class="employee-form">
+  <span class="header-text" *ngIf="data.isEdit; else addHeader">Изменение информации о сотруднике</span>
+  <ng-template #addHeader><span class="header-text">Добавление сотрудника</span></ng-template>
+  <span class="additional-dates" *ngIf="data.isEdit">
+      Дата добовления сотрудника: {{localEmployee.wasAddedDate?.toLocaleString()}}
+    </span>
+  <span class="additional-dates" *ngIf="data.isEdit">
+      Дата последнего изменения сотрудника: {{localEmployee.wasChangedDate?.toLocaleString()}}
+    </span>
+  <p></p>
+  <mat-form-field appearance="fill" >
+    <mat-label for="name">ФИО</mat-label>
+    <input matInput type="text" name="name" id="name" [(ngModel)]="localEmployee.fullName" required>
+  </mat-form-field>
+  <app-department-select [initialDepartmentId]="getInitialDepartment()" (departmentChanged)="onDepartmentChanged($event)">
+  </app-department-select>
+  <app-position-input
+    [(position)]="localEmployee.position"
+    [initialDepartmentId]="getInitialDepartment()"
+    [departmentIdChangedEvent]="departmentIdChanged"
+  ></app-position-input>
+  <mat-form-field appearance="fill" >
+    <mat-label>Дата принятия на работу</mat-label>
+    <input matInput [matDatepicker]="wasEmployedDate" name="wasEmployedDate" [(ngModel)]="localEmployee.wasEmployedDate" required>
+    <mat-datepicker-toggle matSuffix [for]="wasEmployedDate"></mat-datepicker-toggle>
+    <mat-datepicker #wasEmployedDate></mat-datepicker>
+  </mat-form-field>
+  <div class="employee-button-group">
+    <button type="button" class="btn btn-success" (click)="onSubmit()" [disabled]="!checkValidity()">Сохранить</button>
+    <button type="button" class="btn btn-dark" (click)="onCancel()">Отменить</button>
+  </div>
+</form>

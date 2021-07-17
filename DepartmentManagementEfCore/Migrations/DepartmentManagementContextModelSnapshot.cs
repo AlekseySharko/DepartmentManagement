@@ -69,7 +69,7 @@ namespace DepartmentManagementEfCore.Migrations
                         .HasColumnType("DATETIME2(2)");
 
                     b.Property<DateTime?>("WasEmployedDate")
-                        .HasColumnType("DATETIME2(2)");
+                        .HasColumnType("DATE");
 
                     b.HasKey("EmployeeId");
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -65,6 +66,14 @@ namespace DepartmentManagementEfCore.Repositories
                 DepartmentManagementContext.Departments.Remove(department);
                 await DepartmentManagementContext.SaveChangesAsync();
             }, "Ошибка при удалении отдела");
+        }
+
+        public IEnumerable<string> GetExistingPositions(long departmentId)
+        {
+            return DepartmentManagementContext.Departments
+                .Include(d => d.Employees).AsNoTracking()
+                .FirstOrDefault(d => d.DepartmentId == departmentId)?.Employees?
+                .Select(e => e.Position).Distinct();
         }
     }
 }

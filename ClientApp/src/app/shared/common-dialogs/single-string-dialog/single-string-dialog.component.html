@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <h4 class="header-text">{{data.question}}</h4>
+  <mat-form-field>
+    <mat-label>{{data.label}}</mat-label>
+    <input matInput [(ngModel)]="data.information">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-dark" [mat-dialog-close]="data.information">Ok</button>
+  <button class="btn btn-danger" (click)="onNoClick()">Cancel</button>
+</div>

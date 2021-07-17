@@ -31,7 +31,7 @@ namespace DepartmentManagementEfCore.Migrations
                     FullName = table.Column<string>(type: "NVARCHAR(70)", nullable: false),
                     WasAddedDate = table.Column<DateTime>(type: "DATETIME2(2)", nullable: false),
                     WasChangedDate = table.Column<DateTime>(type: "DATETIME2(2)", nullable: true),
-                    WasEmployedDate = table.Column<DateTime>(type: "DATETIME2(2)", nullable: true),
+                    WasEmployedDate = table.Column<DateTime>(type: "DATE", nullable: true),
                     Position = table.Column<string>(type: "NVARCHAR(70)", nullable: false),
                     DepartmentId = table.Column<long>(nullable: true)
                 },

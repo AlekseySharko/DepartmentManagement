@@ -59,6 +59,12 @@ namespace DepartmentManagementAsp.Controllers
             return BadRequest(operationResult.Message);
         }
 
+        [HttpGet("positions")]
+        public IActionResult GetExistingPositions([FromQuery] long departmentId)
+        {
+            return Ok(DepartmentRepository.GetExistingPositions(departmentId));
+        }
+
         private IEnumerable<Department> BreakDepartmentReferenceCycle(IQueryable<Department> departments)
         {
             var listDepartments = departments.ToList();

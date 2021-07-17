@@ -1,0 +1,62 @@
+@media(min-width: 75rem) {
+  :host ::ng-deep .mat-header-cell {
+    font-size: 1.2rem !important;
+  }
+  :host ::ng-deep .btn-control {
+    font-size: 1.2rem !important;
+  }
+  :host ::ng-deep .mat-cell, .mat-footer-cell {
+    font-size: 1.2rem !important;
+  }
+  :host ::ng-deep mat-paginator {
+    font-size: 1.2rem !important;
+  }
+  :host ::ng-deep .mat-select-value {
+    font-size: 1.15rem !important;
+  }
+}
+@media(max-width: 54.6875rem) {
+  :host ::ng-deep .btn-control-group {
+    align-items: center;
+    flex-direction: column;
+  }
+  :host ::ng-deep .btn-control{
+    margin: 0.2rem 0;
+  }
+}
+@media(max-width: 29.625rem) {
+  :host ::ng-deep .mat-header-cell {
+    font-size: 0.8rem !important;
+  }
+  :host ::ng-deep .btn-control {
+    font-size: 0.8rem !important;
+    padding: 4px 8px;
+  }
+  :host ::ng-deep .mat-cell, .mat-footer-cell {
+    font-size: 0.8rem !important;
+  }
+  :host ::ng-deep th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type{
+    padding-left: 0.5rem;
+  }
+  :host ::ng-deep th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding-right: 0.5rem;
+  }
+}
+@media(max-width: 25.625rem) {
+  :host ::ng-deep .mat-header-cell {
+    font-size: 0.75rem !important;
+  }
+  :host ::ng-deep.btn-control {
+    font-size: 0.7rem !important;
+    padding: 4px 5px;
+  }
+  :host ::ng-deep .mat-cell, .mat-footer-cell {
+    font-size: 0.75rem !important;
+  }
+  :host ::ng-deep th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type{
+    padding-left: 0.1rem;
+  }
+  :host ::ng-deep th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding-right: 0.1rem;
+  }
+}

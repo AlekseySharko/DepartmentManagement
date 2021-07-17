@@ -1,0 +1,12 @@
+.btn:focus {
+  box-shadow: none;
+}
+.btn-control-group {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.btn-control {
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
