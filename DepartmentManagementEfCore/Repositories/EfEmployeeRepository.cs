@@ -77,7 +77,15 @@ namespace DepartmentManagementEfCore.Repositories
         {
             return await EfRepoHelper.InvokeManagingExceptions(async () =>
             {
-                DepartmentManagementContext.Employees.Remove(employee);
+                Employee employeeToDelete =
+                    DepartmentManagementContext.Employees.Include(e => e.Department)
+                        .FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
+                if (employeeToDelete is null)
+                {
+                    throw new DbUpdateException("Such employee doesn't exist");
+                }
+                SetDepartmentChangedDateIfExists(employeeToDelete.Department);
+                DepartmentManagementContext.Employees.Remove(employeeToDelete);
                 await DepartmentManagementContext.SaveChangesAsync();
             }, "Ошибка при удалении сотрудника");
         }
