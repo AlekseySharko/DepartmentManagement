@@ -1,0 +1,2 @@
+cd DepartmentManagementAsp
+dotnet run

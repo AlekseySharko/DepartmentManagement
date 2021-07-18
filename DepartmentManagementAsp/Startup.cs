@@ -85,8 +85,8 @@ namespace DepartmentManagementAsp
 
         private async Task HandleFallback(HttpContext context)
         {
+            await Task.CompletedTask;
             var apiPathSegment = new PathString("/api");
-
             bool isApiRequest = context.Request.Path.StartsWithSegments(apiPathSegment);
 
             if (!isApiRequest)
