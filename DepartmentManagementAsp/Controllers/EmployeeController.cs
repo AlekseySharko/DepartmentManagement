@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DepartmentManagementModels;
-using DepartmentManagementModels.OperationResult;
+using DepartmentManagementModels.OperationResults;
 using DepartmentManagementModels.Repositories;
 using Microsoft.AspNetCore.Mvc;
 

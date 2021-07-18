@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DepartmentManagementModels;
-using DepartmentManagementModels.OperationResult;
+using DepartmentManagementModels.OperationResults;
 using DepartmentManagementModels.Repositories;
 using Microsoft.EntityFrameworkCore;
 

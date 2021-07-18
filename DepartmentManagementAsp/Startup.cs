@@ -26,6 +26,7 @@ namespace DepartmentManagementAsp
                 opts.UseSqlServer(Configuration["ConnectionStrings:DepartmentsAndEmployeesConnection"]);
             });
             services.AddEfRepositories();
+            services.AddDefaultValidators();
             services.AddControllers();
         }
 

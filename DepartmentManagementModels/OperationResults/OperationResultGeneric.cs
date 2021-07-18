@@ -1,6 +1,6 @@
-﻿namespace DepartmentManagementModels.OperationResult
+﻿namespace DepartmentManagementModels.OperationResults.Generic
 {
-    public class OperationResult<T> : OperationResult
+    public class OperationResult<T> : OperationResults.OperationResult
     {
         public T Result { get; private set; }
 

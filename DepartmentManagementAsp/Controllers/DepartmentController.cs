@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DepartmentManagementModels;
-using DepartmentManagementModels.OperationResult;
+using DepartmentManagementModels.OperationResults;
 using DepartmentManagementModels.Repositories;
+using DepartmentManagementModels.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DepartmentManagementAsp.Controllers
@@ -12,9 +14,13 @@ namespace DepartmentManagementAsp.Controllers
     public class DepartmentController : Controller
     {
         private IDepartmentRepository DepartmentRepository { get; }
+        private IDepartmentValidator DepartmentValidator { get; }
 
-        public DepartmentController(IDepartmentRepository departmentRepository) =>
+        public DepartmentController(IDepartmentRepository departmentRepository, IDepartmentValidator departmentValidator)
+        {
             DepartmentRepository = departmentRepository;
+            DepartmentValidator = departmentValidator;
+        }
 
         [HttpGet]
         public IActionResult GetDepartments([FromQuery] bool includeEmployees)
@@ -25,23 +31,35 @@ namespace DepartmentManagementAsp.Controllers
         [HttpPost]
         public async Task<IActionResult> PostDepartment([FromBody] Department department)
         {
-            OperationResult operationResult = await DepartmentRepository.AddDepartmentAsync(department);
-            return GetResultFromOperationResult(operationResult);
+            if (ValidateDepartmentOrBadRequest(department, DepartmentValidator.ValidateOnAdd) is BadRequestObjectResult badRequest)
+            {
+                return badRequest;
+            }
+            OperationResult repositoryResult = await DepartmentRepository.AddDepartmentAsync(department);
+            return GetResultFromRepositoryResult(repositoryResult);
         }
 
         [HttpPut]
         public async Task<IActionResult> PutDepartment([FromBody] Department department)
         {
-            OperationResult operationResult = await DepartmentRepository.EditDepartmentAsync(department);
-            return GetResultFromOperationResult(operationResult);
+            if (ValidateDepartmentOrBadRequest(department, DepartmentValidator.ValidateOnEdit) is BadRequestObjectResult badRequest)
+            {
+                return badRequest;
+            }
+            OperationResult repositoryResult = await DepartmentRepository.EditDepartmentAsync(department);
+            return GetResultFromRepositoryResult(repositoryResult);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> PutDepartment([FromRoute] long id)
         {
-            OperationResult operationResult =
-                await DepartmentRepository.DeleteDepartmentAsync(new Department {DepartmentId = id});
-            return GetResultFromOperationResult(operationResult);
+            Department department = new Department { DepartmentId = id };
+            if (ValidateDepartmentOrBadRequest(department, DepartmentValidator.ValidateOnDelete) is BadRequestObjectResult badRequest)
+            {
+                return badRequest;
+            }
+            OperationResult repositoryResult = await DepartmentRepository.DeleteDepartmentAsync(department);
+            return GetResultFromRepositoryResult(repositoryResult);
         }
 
         [HttpGet("positions")]
@@ -50,15 +68,27 @@ namespace DepartmentManagementAsp.Controllers
             return Ok(DepartmentRepository.GetExistingPositions(departmentId));
         }
 
-        private IActionResult GetResultFromOperationResult(OperationResult operationResult)
+        private IActionResult GetResultFromRepositoryResult(OperationResult repositoryResult)
         {
-            if (operationResult.Success)
+            if (repositoryResult.Success)
             {
                 return Ok();
             }
 
-            return BadRequest(operationResult.Message);
+            return BadRequest(repositoryResult.Message);
         }
+
+        private IActionResult ValidateDepartmentOrBadRequest(Department department, Func<Department, IQueryable<Department>, OperationResult> validator)
+        {
+            OperationResult validationResult = validator(department, DepartmentRepository.GetDepartments());
+            if (!validationResult.Success)
+            {
+                return BadRequest(validationResult.Message);
+            }
+
+            return null;
+        }
+
         private IEnumerable<Department> BreakDepartmentReferenceCycle(IQueryable<Department> departments)
         {
             var listDepartments = departments.ToList();

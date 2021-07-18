@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DepartmentManagementAsp.Configuration
 { 
-    static class RepoConfigurator
+    static class RepositoriesConfigurator
     {
         public static void AddEfRepositories(this IServiceCollection services)
         {

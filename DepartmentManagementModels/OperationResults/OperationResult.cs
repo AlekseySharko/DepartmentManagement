@@ -1,17 +1,23 @@
-﻿namespace DepartmentManagementModels.OperationResult
+﻿namespace DepartmentManagementModels.OperationResults
 {
     public class OperationResult
     {
-        public bool Success { get; protected set; }
+        public bool Success { get; set; }
         public string Message { get; protected set; }
 
         protected OperationResult () {}
+
+        public void AddToErrorMessage(string message)
+        {
+            Message += message;
+        }
 
         public static OperationResult Successful()
         {
             return new OperationResult
             {
-                Success = true
+                Success = true,
+                Message = ""
             };
         }
 

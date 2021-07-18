@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DepartmentManagementModels.OperationResult;
+using DepartmentManagementModels.OperationResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace DepartmentManagementEfCore.Repositories

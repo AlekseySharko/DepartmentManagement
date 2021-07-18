@@ -10,8 +10,8 @@ namespace DepartmentManagementModels.Repositories
     {
         IQueryable<Department> GetDepartments(bool includeEmployees = false, Expression<Func<Department, bool>> whereExpression = null);
         IEnumerable<string> GetExistingPositions(long departmentId);
-        Task<OperationResult.OperationResult> AddDepartmentAsync(Department department);
-        Task<OperationResult.OperationResult> EditDepartmentAsync(Department department);
-        Task<OperationResult.OperationResult> DeleteDepartmentAsync(Department department);
+        Task<OperationResults.OperationResult> AddDepartmentAsync(Department department);
+        Task<OperationResults.OperationResult> EditDepartmentAsync(Department department);
+        Task<OperationResults.OperationResult> DeleteDepartmentAsync(Department department);
     }
 }
