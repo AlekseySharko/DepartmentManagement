@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
 using DepartmentManagementAsp.Configuration;
 using DepartmentManagementEfCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -21,10 +22,9 @@ namespace DepartmentManagementAsp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //TODO - remove on production
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "../ClientApp/dist";
+                configuration.RootPath = "../ClientApp/dist/ClientApp";
             });
             services.AddDbContext<DepartmentManagementContext>(opts =>
             {
@@ -37,6 +37,8 @@ namespace DepartmentManagementAsp
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            string strategy = Configuration
+                .GetValue<string>("DevTools:ConnectionStrategy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -47,33 +49,54 @@ namespace DepartmentManagementAsp
             {
                 app.UseExceptionHandler("/Error");
             }
-            
+
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            if (env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
+            app.UseSpaStaticFiles();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                if (strategy == "managed")
+                {
+                    endpoints.MapFallback(HandleFallback);
+                }
             });
 
+
             app.UseSpa(spa => {
-                //TODO - remove on production
-                string strategy = Configuration
-                    .GetValue<string>("DevTools:ConnectionStrategy");
                 if (strategy == "proxy")
                 {
                     spa.UseProxyToSpaDevelopmentServer("http://127.0.0.1:4200");
                 }
                 else if (strategy == "managed")
                 {
-                    spa.Options.SourcePath = "../ClientApp";
-                    spa.UseAngularCliServer("start");
+                    // spa.Options.SourcePath = "../ClientApp";
+                    //
+                    // if (env.IsDevelopment())
+                    // {
+                    //     spa.UseAngularCliServer(npmScript: "start");
+                    // }
                 }
             });
+        }
+
+        private async Task HandleFallback(HttpContext context)
+        {
+            var apiPathSegment = new PathString("/api");
+
+            bool isApiRequest = context.Request.Path.StartsWithSegments(apiPathSegment);
+
+            if (!isApiRequest)
+            {
+                context.Response.Redirect("index.html");
+            }
+            else
+            {
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+            }
         }
     }
 }
