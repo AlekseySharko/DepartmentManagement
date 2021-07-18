@@ -64,7 +64,12 @@ namespace DepartmentManagementEfCore.Repositories
         {
             return await EfRepoHelper.InvokeManagingExceptions(async () =>
             {
-                DepartmentManagementContext.Departments.Remove(department);
+                Department departmentToDelete =
+                    DepartmentManagementContext.Departments.Include(d => d.Employees)
+                        .FirstOrDefault(d => d.DepartmentId == department.DepartmentId) ?? department;
+                departmentToDelete.Employees = null;
+                await DepartmentManagementContext.SaveChangesAsync();
+                DepartmentManagementContext.Departments.Remove(departmentToDelete);
                 await DepartmentManagementContext.SaveChangesAsync();
             }, "Ошибка при удалении отдела");
         }
