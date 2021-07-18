@@ -7,11 +7,26 @@
 .mat-cell {
   font-size: 1.05rem;
 }
+mat-paginator {
+  font-size: 0.95rem !important;
+}
+:host ::ng-deep  .mat-select-value {
+  font-size: 0.95rem !important;
+}
 @media(max-width: 30rem) {
   .mat-cell {
     font-size: 0.9rem;
   }
   .btn-control {
     font-size: 0.9rem;
+  }
+  mat-paginator {
+    font-size: 0.8rem !important;
+  }
+  :host ::ng-deep .mat-select-value {
+    font-size: 0.8rem !important;
+  }
+  :host ::ng-deep .mat-icon-button {
+
   }
 }

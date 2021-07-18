@@ -2,7 +2,7 @@
   width: 98%;
   margin: auto;
   text-align: center;
-  padding-top: 0.3rem;
+  padding-top: 1rem;
 }
 :host ::ng-deep table {
   width: 100%;
