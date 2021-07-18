@@ -12,7 +12,7 @@ namespace DepartmentManagementModels.Validators
             if (department is null)
             {
                 result.Success = false;
-                result.AddToErrorMessage("Отдел не может быть null");
+                result.AddToErrorMessage("Отдел не может быть null. ");
                 return result;
             }
             if (department.DepartmentId != 0)
@@ -36,14 +36,14 @@ namespace DepartmentManagementModels.Validators
             return result;
         }
 
-        public OperationResult ValidateOnEdit(Department department, IQueryable<Department> existingDepartments = null)
+        public OperationResult ValidateOnDelete(Department department, IQueryable<Department> existingDepartments = null)
         {
             OperationResult result = OperationResult.Successful();
 
             if (department is null)
             {
                 result.Success = false;
-                result.AddToErrorMessage("Отдел не может быть null");
+                result.AddToErrorMessage("Отдел не может быть null. ");
                 return result;
             }
             if (existingDepartments != null && existingDepartments.FirstOrDefault(d => d.DepartmentId == department.DepartmentId) == null)
@@ -51,6 +51,14 @@ namespace DepartmentManagementModels.Validators
                 result.Success = false;
                 result.AddToErrorMessage("Отдела с таким id не существует. ");
             }
+
+            return result;
+        }
+
+        public OperationResult ValidateOnEdit(Department department, IQueryable<Department> existingDepartments = null)
+        {
+            OperationResult result = ValidateOnDelete(department, existingDepartments);
+
             if (string.IsNullOrWhiteSpace(department.Name))
             {
                 result.Success = false;
@@ -63,25 +71,6 @@ namespace DepartmentManagementModels.Validators
             {
                 result.Success = false;
                 result.AddToErrorMessage("Отдел с таким именем уже существует. ");
-            }
-
-            return result;
-        }
-
-        public OperationResult ValidateOnDelete(Department department, IQueryable<Department> existingDepartments = null)
-        {
-            OperationResult result = OperationResult.Successful();
-
-            if (department is null)
-            {
-                result.Success = false;
-                result.AddToErrorMessage("Отдел не может быть null");
-                return result;
-            }
-            if (existingDepartments != null && existingDepartments.FirstOrDefault(d => d.DepartmentId == department.DepartmentId) == null)
-            {
-                result.Success = false;
-                result.AddToErrorMessage("Отдела с таким id не существует. ");
             }
 
             return result;

@@ -96,9 +96,14 @@ namespace DepartmentManagementEfCore.Repositories
 
             return await EfRepoHelper.InvokeManagingExceptions(async () =>
             {
+                if (employeeResult.Result.Department != null)
+                {
+                    employeeResult.Result.Department.WasChangedDate = DateTime.Now;
+                }
+                department.WasChangedDate = DateTime.Now;
                 employeeResult.Result.Department = department;
                 await DepartmentManagementContext.SaveChangesAsync();
-            }, "Ошибка при удалении сотрудника из отдела");
+            }, "Ошибка при перемещении сотрудника из отдела");
         }
 
         public async Task<OperationResult> RemoveEmployeeFromDepartmentAsync(long employeeId)
@@ -111,6 +116,7 @@ namespace DepartmentManagementEfCore.Repositories
 
             return await EfRepoHelper.InvokeManagingExceptions(async () =>
             {
+                employeeResult.Result.Department.WasChangedDate = DateTime.Now;
                 employeeResult.Result.Department = null;
                 await DepartmentManagementContext.SaveChangesAsync();
             }, "Ошибка при удалении сотрудника из отдела");

@@ -8,6 +8,7 @@ namespace DepartmentManagementAsp.Configuration
         public static void AddDefaultValidators(this IServiceCollection services)
         {
             services.AddScoped<IDepartmentValidator, DepartmentValidator>();
+            services.AddScoped<IEmployeeValidator, EmployeeValidator>();
         }
     }
 }
