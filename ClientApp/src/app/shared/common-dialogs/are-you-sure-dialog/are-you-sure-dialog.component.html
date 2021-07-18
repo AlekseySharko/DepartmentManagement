@@ -1,5 +1,9 @@
 <div mat-dialog-content class="text-center">
-  <p class="header-text">{{data.question}}<b>{{data.bold}}</b></p>
+  <p class="header-text">
+    {{data.question}}
+    <br *ngIf="data.boldNextLine">
+    <b>{{data.bold}}</b>
+  </p>
 </div>
 <div mat-dialog-actions>
   <button class="btn btn-danger" [mat-dialog-close]="true">{{data.okButton}}</button>

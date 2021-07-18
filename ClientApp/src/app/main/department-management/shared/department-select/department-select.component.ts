@@ -19,7 +19,7 @@ export class DepartmentSelectComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.departmentSubscription = this.departmentProvider.getDepartments().subscribe(data => {
-      this.departments = data;
+      this.departments = data.sort((a, b) => a.name.localeCompare(b.name));
       this.selectedDepartment = this.departments.find(d => d.departmentId === this.initialDepartmentId) ?? new Department();
     })
   }

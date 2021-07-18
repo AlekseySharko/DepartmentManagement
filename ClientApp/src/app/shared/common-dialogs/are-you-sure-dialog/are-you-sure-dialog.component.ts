@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 export interface AreYouSureDialogData {
   question: string,
   bold: string,
+  boldNextLine: boolean,
   okButton: string,
   cancelButton: string;
 }

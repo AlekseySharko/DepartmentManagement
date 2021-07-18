@@ -7,6 +7,8 @@ import {EmployeeProviderService} from "../../../services/employee-provider.servi
 import {Subscription} from "rxjs";
 import {DialogMessageHandlerService} from "../../../../../core/services/dialog-message-handler.service";
 import {Department} from "../../../classes/department";
+import {AreYouSureDialogComponent} from "../../../../../shared/common-dialogs/are-you-sure-dialog/are-you-sure-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dep-employees-list',
@@ -23,7 +25,8 @@ export class DepEmployeesListComponent implements OnDestroy, AfterViewInit {
   employeeSubscription = new Subscription();
 
   constructor(private employeeProvider: EmployeeProviderService,
-              private errorHandler: DialogMessageHandlerService) { }
+              private errorHandler: DialogMessageHandlerService,
+              private dialog: MatDialog) { }
 
   ngAfterViewInit(): void {
     this.onChanges();
@@ -40,18 +43,34 @@ export class DepEmployeesListComponent implements OnDestroy, AfterViewInit {
   }
 
   onDeleteEmployee(employee: Employee) {
-    this.employeeRemoveSubscription = this.employeeProvider.removeFromDepartment(employee.employeeId).subscribe(
-      () => {},
-      error => {
-        this.errorHandler.onHttpError(error);
-      },
-      () => {
-        this.employeeSubscription = this.employeeProvider
-          .getEmployees(false, this.department.departmentId).subscribe(data => {
-            this.department.employees = data;
-            this.onChanges();
-          });
+    const dialogRef = this.dialog.open(AreYouSureDialogComponent, {
+      width: '24rem',
+      minWidth: '20rem',
+      data: {
+        question: `Вы уверены что хотите удалить сотрудника с ФИО: ${employee.fullName} из даного отдела? `,
+        boldNextLine: true,
+        bold: "Это действие нельзя будет отменить",
+        okButton: "Удалить",
+        cancelButton: "Отмена"
       }
-    );
+    });
+    dialogRef.afterClosed().subscribe(data => {
+        if(data) {
+          this.employeeRemoveSubscription = this.employeeProvider.removeFromDepartment(employee.employeeId).subscribe(
+            () => {},
+            error => {
+              this.errorHandler.onHttpError(error);
+            },
+            () => {
+              this.employeeSubscription = this.employeeProvider
+                .getEmployees(false, this.department.departmentId).subscribe(data => {
+                  this.department.employees = data;
+                  this.onChanges();
+                });
+            }
+          );
+        }
+      }
+    )
   }
 }

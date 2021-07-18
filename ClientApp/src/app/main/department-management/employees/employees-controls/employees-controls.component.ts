@@ -42,8 +42,8 @@ export class EmployeesControlsComponent implements OnInit {
       width: '24rem',
       minWidth: '20rem',
       data: {
-        question: "Вы уверены что хотите удалить сотрудника с ФИО: ",
-        bold: this.employee.fullName,
+        question: "Вы уверены, что хотите удалить сотрудника с ФИО: ",
+        bold: this.employee.fullName + '?',
         okButton: "Удалить",
         cancelButton: "Отмена"
       }

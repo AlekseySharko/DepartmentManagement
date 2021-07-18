@@ -49,7 +49,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
       if(data) {
         this.onChange();
       }
-    })
+    });
   }
   onChange(){
     this.employeesSubscription = this.employeeProvider.getEmployees(true).subscribe(data => {

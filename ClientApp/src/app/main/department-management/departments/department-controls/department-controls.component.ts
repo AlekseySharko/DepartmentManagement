@@ -36,8 +36,8 @@ export class DepartmentControlsComponent implements OnInit {
       width: '24rem',
       minWidth: '20rem',
       data: {
-        question: "Вы уверены что хотите удалить ",
-        bold: this.department.name,
+        question: "Вы уверены, что хотите удалить ",
+        bold: this.department.name + '?',
         okButton: "Удалить",
         cancelButton: "Отмена"
       }
