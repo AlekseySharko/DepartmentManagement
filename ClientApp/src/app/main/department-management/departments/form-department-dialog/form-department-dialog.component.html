@@ -2,7 +2,7 @@
   <span class="header-text" *ngIf="data.isEdit; else addHeader">Изменение информации о отделе</span>
   <ng-template #addHeader><span class="header-text">Добавление отдела</span></ng-template>
   <mat-form-field appearance="fill" >
-    <mat-label for="department-name">Название</mat-label>
+    <mat-label for="department-name">Название отдела</mat-label>
     <input matInput type="text" name="department-name" id="department-name" [(ngModel)]="localDepartment.name" required>
   </mat-form-field>
   <app-dep-employees-list *ngIf="data.isEdit" [department]="data.department"></app-dep-employees-list>
