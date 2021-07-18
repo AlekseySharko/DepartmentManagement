@@ -21,6 +21,11 @@ namespace DepartmentManagementAsp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //TODO - remove on production
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "../ClientApp/dist";
+            });
             services.AddDbContext<DepartmentManagementContext>(opts =>
             {
                 opts.UseSqlServer(Configuration["ConnectionStrings:DepartmentsAndEmployeesConnection"]);
@@ -44,7 +49,10 @@ namespace DepartmentManagementAsp
             }
             
             app.UseStaticFiles();
-
+            if (env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -53,6 +61,7 @@ namespace DepartmentManagementAsp
             });
 
             app.UseSpa(spa => {
+                //TODO - remove on production
                 string strategy = Configuration
                     .GetValue<string>("DevTools:ConnectionStrategy");
                 if (strategy == "proxy")
