@@ -33,10 +33,13 @@ namespace DepartmentManagementEfCore.Repositories
         {
             return await EfRepoHelper.InvokeManagingExceptions(async () =>
             {
-                employee.WasAddedDate = DateTime.Now;
                 employee.Department =
                     DepartmentManagementContext.Departments.FirstOrDefault(d =>
                         d.DepartmentId == employee.Department.DepartmentId);
+
+                SetDepartmentChangedDateIfExists(employee.Department);
+                employee.WasAddedDate = DateTime.Now;
+
                 DepartmentManagementContext.Employees.Add(employee);
                 await DepartmentManagementContext.SaveChangesAsync();
             }, "Ошибка при добавлении сотрудника");
@@ -96,10 +99,7 @@ namespace DepartmentManagementEfCore.Repositories
 
             return await EfRepoHelper.InvokeManagingExceptions(async () =>
             {
-                if (employeeResult.Result.Department != null)
-                {
-                    employeeResult.Result.Department.WasChangedDate = DateTime.Now;
-                }
+                SetDepartmentChangedDateIfExists(employeeResult.Result.Department);
                 department.WasChangedDate = DateTime.Now;
                 employeeResult.Result.Department = department;
                 await DepartmentManagementContext.SaveChangesAsync();
@@ -140,6 +140,14 @@ namespace DepartmentManagementEfCore.Repositories
                 employeeToEdit.Department?.DepartmentId != newEmployeeData.Department?.DepartmentId)
             {
                 await MoveEmployeeToDepartmentAsync(newEmployeeData.Department.DepartmentId, employeeToEdit.EmployeeId);
+            }
+        }
+
+        private void SetDepartmentChangedDateIfExists(Department department)
+        {
+            if (department != null)
+            {
+                department.WasChangedDate = DateTime.Now;
             }
         }
     }

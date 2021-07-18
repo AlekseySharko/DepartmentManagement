@@ -145,9 +145,85 @@ namespace DepartmentManagementEfCore
                         WasEmployedDate = DateTime.Now - TimeSpan.FromDays(7),
                         Department = financialDep
                     },
+                    new Employee
+                    {
+                        FullName = "Брагина Марианна Александровна",
+                        Position = "Финансист",
+                        WasAddedDate = DateTime.Now,
+                        WasEmployedDate = DateTime.Now - TimeSpan.FromDays(7),
+                        Department = financialDep
+                    },
                 };
 
-                context.Departments.AddRange(itDep, accountingDep, financialDep);
+                Department legalDep = new Department
+                {
+                    Name = "Юридический отдел",
+                    WasAddedDate = DateTime.Now
+                };
+
+                legalDep.Employees = new List<Employee>
+                {
+                    new Employee
+                    {
+                        FullName = "Назаров Оскар Вадимович",
+                        Position = "Главный юрист",
+                        WasAddedDate = DateTime.Now,
+                        WasEmployedDate = DateTime.Now - TimeSpan.FromDays(225),
+                        Department = legalDep
+                    },
+                    new Employee
+                    {
+                        FullName = "Петров Прохор Серапионович",
+                        Position = "Юрист",
+                        WasAddedDate = DateTime.Now,
+                        WasEmployedDate = DateTime.Now - TimeSpan.FromDays(11),
+                        Department = legalDep
+                    },
+                    new Employee
+                    {
+                        FullName = "Пахомова Алина Аркадьевна",
+                        Position = "Юрист-экономист",
+                        WasAddedDate = DateTime.Now,
+                        WasEmployedDate = DateTime.Now - TimeSpan.FromDays(7),
+                        Department = legalDep
+                    }
+                };
+
+                Department salesDep = new Department
+                {
+                    Name = "Торговый отдел",
+                    WasAddedDate = DateTime.Now
+                };
+
+                salesDep.Employees = new List<Employee>
+                {
+                    new Employee
+                    {
+                        FullName = "Бобылёва Изабелла Федоровна",
+                        Position = "Глава отдела продаж",
+                        WasAddedDate = DateTime.Now,
+                        WasEmployedDate = DateTime.Now - TimeSpan.FromDays(225),
+                        Department = salesDep
+                    },
+                    new Employee
+                    {
+                        FullName = "Костин Эльдар Авксентьевич",
+                        Position = "Продавец-консультант",
+                        WasAddedDate = DateTime.Now,
+                        WasEmployedDate = DateTime.Now - TimeSpan.FromDays(11),
+                        Department = salesDep
+                    },
+                    new Employee
+                    {
+                        FullName = "Щукина Полина Николаевна",
+                        Position = "Продавец-консультант",
+                        WasAddedDate = DateTime.Now,
+                        WasEmployedDate = DateTime.Now - TimeSpan.FromDays(7),
+                        Department = salesDep
+                    }
+                };
+
+                context.Departments.AddRange(itDep, accountingDep, financialDep, legalDep, salesDep);
                 context.SaveChanges();
             }
         }
